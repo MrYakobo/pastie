@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pastie</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.11.1/css/tachyons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Major+Mono+Display&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="icon.png" />
+    <style>
+        .ff-1 {
+            font-family: 'Major Mono Display';
+        }
+
+        .ff-2 {
+            font-family: 'Fira Code';
+        }
+    </style>
+</head>
+
+<body class="ff-1 mb3 pa3">
+    <h1 class="f1-l f3 tc fw1 ma2">pastie.lind.sk</h1>
+
+    <div class="mb4 mt2 bt b--black-10 mw5 center"></div>
+    <div class="tc">
+        <iframe class="dn" name="frame" id="frame"></iframe>
+        <form target="frame" action="/" method="POST">
+            <textarea name="paste" class="pre-wrap ff-2 w-60-l w-100 h5 f6 pa2 br2 b--black-40"
+                placeholder="paste something here yo">{{paste}}</textarea>
+            <br>
+            <button id="submit" class="pa2 fw6 w4 bg-white hover-bg-near-white br1 b--black-30" type="submit"
+                onclick="submitted()">submit</button>
+        </form>
+    </div>
+
+    <div class="mb1 mt4 bt b--black-10 mw5 center"></div>
+    <div class="flex tl center flex-row-l flex-column center justify-center">
+        <div class="">
+            <p class="f2 mt0">write</p>
+            <p class="ma0 ff-2 w-100 w-auto-l f4 pa3 bg-near-black near-white">
+                <span class="gray"># write short string</span>
+                <br>
+                $ curl -d <span class="yellow">'tjenis'</span> pastie.lind.sk
+                <br>
+                <span class="gray"># write things that has url special characters (=&/)</span>
+                <br> $ curl --data-urlencode =<span class="yellow">'true &&
+                    false=false'</span> pastie.lind.sk
+                <br>
+                <span class="gray"># write from file</span>
+                <br>
+                $ curl --data-urlencode <span class="green">@some_file.txt</span> pastie.lind.sk
+            </p>
+
+        </div>
+        <div class="mh3">
+            <p class="f2 mt4 mt0-l">read</p>
+            <p class="ff-2 w-100 w-auto-l f4 pa3 bg-near-black near-white">$ curl pastie.lind.sk</p>
+        </div>
+    </div>
+</body>
+<script>
+    function submitted() {
+        var b = document.getElementById('submit')
+        b.innerHTML = 'submitted'
+        b.classList.add('bg-navy', 'white', 'hover-bg-navy')
+
+        setTimeout(function () {
+            b.classList.remove('bg-navy', 'white', 'hover-bg-navy')
+            b.innerHTML = 'submit'
+        }, 3000)
+    }
+</script>
+
+</html>
